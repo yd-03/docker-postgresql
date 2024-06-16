@@ -1,0 +1,15 @@
+services:
+  db:
+    restart: always # コンテナが停止した場合は常に再起動
+    build:
+      context: ./postgresql # Dockerイメージをビルドする際のコンテキストディレクトリ
+      dockerfile: Dockerfile # 使用するDockerfileの名前
+    image: postgres:13 # 使用するDockerイメージ（PostgreSQLのバージョン13）
+    environment:
+      POSTGRES_PASSWORD: password # PostgreSQLのスーパーユーザーのパスワード
+
+  adminer:
+    image: adminer # 使用するDockerイメージ（Adminerの最新バージョン）
+    restart: always # コンテナが停止した場合は常に再起動
+    ports:
+      - 8080:8080 # ホストマシンの8080ポートをコンテナの8080ポートにマッピング
