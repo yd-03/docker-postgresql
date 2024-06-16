@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile # 使用するDockerfileの名前
     image: postgres:13 # 使用するDockerイメージ（PostgreSQLのバージョン13）
     environment:
-      POSTGRES_PASSWORD: password # PostgreSQLのスーパーユーザーのパスワード
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # PostgreSQLのスーパーユーザーのパスワード
 
   adminer:
     image: adminer # 使用するDockerイメージ（Adminerの最新バージョン）
