@@ -1,19 +1,26 @@
 services:
   db:
-    restart: always # コンテナが停止した場合は常に再起動
+    restart: always # コンテナが停止した場合は常に再起動する
     build:
-      context: ./postgresql # Dockerイメージをビルドする際のコンテキストディレクトリ
-      dockerfile: Dockerfile # 使用するDockerfileの名前
+      context: ./postgresql # Dockerイメージをビルドする際のコンテキストディレクトリを指定する
+      dockerfile: Dockerfile # 使用するDockerfileの名前を指定する
     environment:
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # PostgreSQLのスーパーユーザーのパスワード
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # PostgreSQLのスーパーユーザーのパスワードを環境変数から取得する
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data # 永続化のためのボリュームをマウントする
+    networks:
+      - postgresql-network # このサービスをpostgresql-networkネットワークに接続する
 
   adminer:
-    image: adminer # 使用するDockerイメージ（Adminerの最新バージョン）
-    restart: always # コンテナが停止した場合は常に再起動
+    image: adminer # 使用するDockerイメージ（Adminerの最新バージョン）を指定する
+    restart: always # コンテナが停止した場合は常に再起動する
     ports:
-      - 8080:8080 # ホストマシンの8080ポートをコンテナの8080ポートにマッピング
+      - 8080:8080 # ホストマシンの8080ポートをコンテナの8080ポートにマッピングする
 
 volumes:
-  db-data: {} # ボリュームの定義
+  db-data: {} # データベースのデータを保存するためのボリュームを定義する
+
+networks:
+  postgresql-network:
+    driver: bridge # ネットワークドライバーとしてbridgeを使用する
+
