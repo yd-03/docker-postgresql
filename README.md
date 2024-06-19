@@ -98,3 +98,54 @@
    ```yaml
    command: bundle exec rails s -p 3000 -b '0.0.0.0'
    ```
+
+## Docker Compose コマンド
+
+1. **コンテナ作成・起動【up】**
+
+   ```bash
+   $ docker compose up  # イメージが存在しないときはビルドする
+   ```
+
+   オプション：
+
+   - --build：イメージをビルドした上でコンテナを作成・起動する
+   - -d：コンテナをバッググラウンドで起動させる（detach）
+
+2. **コンテナ一覧表示【ps】**
+
+   ```bash
+   $ docker compose ps 　　# コンテナの一覧を表示
+   ```
+
+   オプション：
+
+   - -a：停止中を含めたコンテナの一覧を表示させたい場合（all）
+
+3. **ログ表示【logs】**
+
+   ```bash
+   $ docker compose logs web 　# サービス名を指定
+   ```
+
+4. コンテナ作成後、コマンド実行【run】
+
+   ```bash
+   $ docker compose run web ruby app.rb 　# サービスとコマンドを指定
+   ```
+
+5. コマンド実行【exec】
+
+   ```bash
+   $ docker compose exec web /bin/sh # サービスとコマンドを指定
+   ```
+
+6. コンテナを停止・削除【down】
+
+   ```bash
+   $ docker compose down
+   ```
+
+## 参考資料
+
+- Docker Compose コマンドリファレンス: [Docker ドキュメント](https://docs.docker.jp/engine/reference/commandline/compose_toc.html)
