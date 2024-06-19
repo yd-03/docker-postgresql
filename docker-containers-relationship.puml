@@ -1,0 +1,15 @@
+@startuml "docker-containers-relationship"
+package "Docker Network: postgresql-network" {
+    [db]
+    [adminer]
+    [db] -down- [adminer]
+}
+
+node "Docker Host" {
+    [db] : PostgreSQL 16.0
+    [adminer] : Adminer
+}
+
+[db] --> db-data : uses
+cloud db-data : "Volume: db-data"
+@enduml
